@@ -1,0 +1,37 @@
+q=0
+accept_states=[]
+states=[]
+alphabet=[]
+with open("magic.txt", "r") as f:
+    transitions = {}
+    for line in f:
+        parts = line.strip().split()
+        if len(parts)==3:
+            state1, symbol, state2 = parts
+            if symbol not in alphabet:
+                alphabet.append(symbol)
+            if state1 not in states:
+                states.append(state1)
+            if state2 not in states:
+                states.append(state2)
+            if q==0:
+                start_state=state1
+                q=q+1
+            transitions[(state1, symbol)] = state2
+        else:
+            final_state1,final_state2=parts
+            accept_states=[final_state1,final_state2]
+def getter_state(state,symbol,transitions):
+    return transitions.get((state,symbol),None)
+current_state = start_state
+input_string = input("Dati secventa: ")
+for symbol in input_string:
+    current_state = getter_state(current_state, symbol,transitions)
+    print(current_state)
+    if current_state is None:
+        break
+
+if current_state in accept_states:
+    print("Acceptat")
+else:
+    print("Respins")
