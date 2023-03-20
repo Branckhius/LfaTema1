@@ -1,3 +1,6 @@
+from tracemalloc import start
+
+
 q=0
 accept_states=[]
 states=[]
@@ -18,13 +21,15 @@ with open("magic.txt", "r") as f:
                 start_state=state1
                 q=q+1
             transitions[(state1, symbol)] = state2
+            accept_states=[state1,symbol,state2]    
         else:
-            final_state1,final_state2=parts
-            accept_states=[final_state1,final_state2]
+            accept_states=parts
+            print(accept_states)
 def getter_state(state,symbol,transitions):
     return transitions.get((state,symbol),None)
 current_state = start_state
 input_string = input("Dati secventa: ")
+print(start_state)
 for symbol in input_string:
     current_state = getter_state(current_state, symbol,transitions)
     print(current_state)
