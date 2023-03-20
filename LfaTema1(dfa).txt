@@ -1,6 +1,3 @@
-from tracemalloc import start
-
-
 q=0
 accept_states=[]
 states=[]
