@@ -21,7 +21,6 @@ with open("magic.txt", "r") as f:
             accept_states=[state1,symbol,state2]    
         else:
             accept_states=parts
-            print(accept_states)
 def getter_state(state,symbol,transitions):
     return transitions.get((state,symbol),None)
 current_state = start_state
